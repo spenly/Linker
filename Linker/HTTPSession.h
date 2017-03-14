@@ -8,6 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+#define SUCCESS @"success"
+#define FAILED @"failed"
+#define REDIRECT @"redirect"
+#define ERROR @"error"
+
+
 @interface HTTPSession : NSObject
 
+
+@property (nonatomic, copy) void (^httpGetCallBack)(NSString* responseData);
+// @property (nonatomic)NSURLSession *httpSession;
+- (void) httpGet:(NSString*) surl;
+//- (void) httpGetUrl:(NSString*) surl;
+
+
 @end
+

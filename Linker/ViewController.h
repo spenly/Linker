@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "HTTPSession.h"
+
 @interface ViewController : UIViewController
 
 
