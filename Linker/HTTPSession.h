@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#define START @"start"
 #define SUCCESS @"success"
 #define FAILED @"failed"
 #define REDIRECT @"redirect"
@@ -21,7 +22,7 @@
 // @property (nonatomic)NSURLSession *httpSession;
 - (void) httpGet:(NSString*) surl;
 //- (void) httpGetUrl:(NSString*) surl;
-
+- (void) startRequest: (NSString*) surl;
 
 @end
 

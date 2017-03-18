@@ -53,6 +53,12 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
 //    [task resume];
 //}
 
+- (void) startRequest: (NSString*) surl{
+    [self httpGet:surl];
+    self.httpGetCallBack([NSString stringWithFormat:@"%@\n[%@]: %@",@"start ...",START,surl]);
+}
+
+
 - (void) httpGet:(NSString*) surl{
     NSURL* url = [NSURL URLWithString:surl];
     //NSURLSession * httpSession = [NSURLSession sharedSession];
@@ -80,7 +86,7 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
         NSHTTPURLResponse* rep = (NSHTTPURLResponse*) response;
 //        NSLog(@"%@", [NSString stringWithFormat:@"%li => %@",(long)rep.statusCode, rep.URL.absoluteString]);
         if(rep.statusCode == 200){
-            result = [NSString stringWithFormat:@"[%@]: %@",SUCCESS,@"Here landing page is"];
+            result = [NSString stringWithFormat:@"[%@]: %@\n%@",SUCCESS,response.URL,@"Here landing page is"];
             return result;
         }
         else if(( rep.statusCode == 301 || rep.statusCode==302)

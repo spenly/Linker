@@ -24,8 +24,8 @@
     __block ViewController* tmp = self;
     [self.httpSession setHttpGetCallBack:^(NSString *data) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            tmp.logTextView.text =
-            [NSString stringWithFormat:@"%@\n%@",tmp.logTextView.text, data];
+            tmp.logTextView.text = [tmp.logTextView.text isEqualToString:@""] ?
+            data:[NSString stringWithFormat:@"%@\n%@",tmp.logTextView.text, data];
 //            if([data hasPrefix:REDIRECT]){
 //                NSString * url = [data substringFromIndex:[REDIRECT length]+1 ];
 //                NSLog(@"%@",url);
@@ -53,13 +53,16 @@
 
 - (void)getResponse:(NSString*) url{
     if(url.length>0){
-        [self.httpSession httpGet:url];
+        [self.httpSession startRequest:url];
 //        self.logTextView.text = [NSString stringWithFormat:@"start: %@", url];
-        self.logTextView.text = @"start ...";
+        //// reset log view
+        self.logTextView.text = @"";
     }
     else{
         self.logTextView.text = @"invalid or empty url.";
     }
+//      close keyboard 
+    [self.urlTextField endEditing:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
